@@ -1,0 +1,7 @@
+.git
+.DS_Store
+*.go
+go.mod
+go.sum
+Dockerfile
+*.tgz

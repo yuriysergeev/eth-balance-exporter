@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: yuriy4sergeev/eth-balance-exporter
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+env:
+  WALLET_ADDRESSES: "0x6311162C7Bfdce23aE66FE62bB84cdF213A74636,0x78B6934e6326Cf8891c96026b3264B4e11AF68a2"
+  ETH_RPC_URL: "https://arb1.arbitrum.io/rpc"
+
+serviceMonitor:
+  enabled: true
+  interval: 15s
+  scrapeTimeout: 10s
+  labels:
+    release: kube-prometheus-stack
+  namespace: prometheus
+#nodeSelector: {}
+#
+#tolerations: []
+#
+#affinity: {}
