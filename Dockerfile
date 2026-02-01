@@ -1,11 +1,14 @@
 # Use a minimal base image with Go installed
-FROM golang:1.22-alpine AS builder
+FROM golang:1.23-alpine AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Install build tools and dependencies
 RUN apk add --no-cache git
+
+# Set GOTOOLCHAIN to auto to allow downloading the required Go version
+ENV GOTOOLCHAIN=auto
 
 # Copy the Go modules manifest and download dependencies
 COPY go.mod go.sum ./
